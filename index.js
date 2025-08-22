@@ -23,6 +23,17 @@ app.get('/api/posts', (req, res) => {
     res.json(posts)
 })
 
+app.post('/api/posts', (req, res) => {
+    const newPost = req.body;
+    newPost.id = Date.now().toString();
+    console.log(req.body)
+
+    req.posts.push(newPost);
+    fs.writeFile(DATA_FILE, JSON.stringify(req.posts, null, 2))
+        .then(() => res.json(newPost))
+        .catch((error) => res.status(500).json({error: 'Ocorreu um erro ao tentar salvar o arquivo'}))
+})
+
 app.listen(PORT, () => {
     console.log(`Executando na porta ${PORT}`)
 })

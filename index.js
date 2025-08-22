@@ -12,7 +12,6 @@ app.use(async (req, res, next) => {
     } catch (error) {
         req.posts = [];
     }
-
     next();
 })
 

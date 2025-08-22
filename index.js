@@ -1,11 +1,12 @@
 const express = require('express')
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 const fs = require('fs/promises')
 
 const app = express()
 const PORT = 3000
 const DATA_FILE = 'posts.json'
 
+app.use(bodyParser.json())
 app.use(async (req, res, next) => {
     try {
         const data = await fs.readFile(DATA_FILE, 'utf8');
